@@ -27,11 +27,32 @@ y_train = np.array(SteeringMeasurements)
 
 
 model = keras.models.Sequential()
-model.add(keras.layers.Flatten(input_shape=(160, 320, 3)))
+model.add(keras.layers.Lambda(lambda x: x / 255.0 - 0.5, input_shape=(160,320,3)))
+model.add(keras.layers.Cropping2D(((70,25),(0,0))))
+
+model.add(keras.layers.Conv2D(24, (5, 5)))
+model.add(keras.layers.Activation('relu'))
+
+model.add(keras.layers.Conv2D(36, (5, 5)))
+model.add(keras.layers.Activation('relu'))
+
+model.add(keras.layers.Conv2D(48, (5, 5)))
+model.add(keras.layers.Activation('relu'))
+
+model.add(keras.layers.Conv2D(64, (3, 3)))
+model.add(keras.layers.Activation('relu'))
+
+model.add(keras.layers.Conv2D(64, (3, 3)))
+model.add(keras.layers.Activation('relu'))
+
+model.add(keras.layers.Flatten())
+model.add(keras.layers.Dense(100))
+model.add(keras.layers.Dense(50))
+model.add(keras.layers.Dense(10))
 model.add(keras.layers.Dense(1))
 
 model.compile(loss='mse', optimizer='adam')
-model.fit(X_train, y_train, validation_split=0.3, shuffle=True, nb_epoch=15)
+model.fit(X_train, y_train, validation_split=0.3, shuffle=True, nb_epoch=5)
 
 model.save('model.h5')
             

@@ -25,25 +25,22 @@ X_train = np.array(images)
 y_train = np.array(SteeringMeasurements)
 
 
-
+#nVidia model
 model = keras.models.Sequential()
 model.add(keras.layers.Lambda(lambda x: x / 255.0 - 0.5, input_shape=(160,320,3)))
 model.add(keras.layers.Cropping2D(((70,25),(0,0))))
 
-model.add(keras.layers.Conv2D(24, (5, 5)))
-model.add(keras.layers.Activation('relu'))
+model.add(keras.layers.Convolution2D(24, 5, 5, subsample=(2,2), activation="relu"))
 
-model.add(keras.layers.Conv2D(36, (5, 5)))
-model.add(keras.layers.Activation('relu'))
+model.add(keras.layers.Convolution2D(36, 5, 5, subsample=(2,2), activation="relu"))
 
-model.add(keras.layers.Conv2D(48, (5, 5)))
-model.add(keras.layers.Activation('relu'))
+model.add(keras.layers.Convolution2D(48, 5, 5, subsample=(2,2), activation="relu"))
 
-model.add(keras.layers.Conv2D(64, (3, 3)))
-model.add(keras.layers.Activation('relu'))
 
-model.add(keras.layers.Conv2D(64, (3, 3)))
-model.add(keras.layers.Activation('relu'))
+model.add(keras.layers.Convolution2D(64, 3, 3, activation="relu"))
+model.add(keras.layers.Convolution2D(64, 3, 3, activation="relu"))
+
+
 
 model.add(keras.layers.Flatten())
 model.add(keras.layers.Dense(100))

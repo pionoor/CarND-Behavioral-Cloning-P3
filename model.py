@@ -67,7 +67,7 @@ model.add(keras.layers.Dense(10))
 model.add(keras.layers.Dense(1))
 
 model.compile(loss='mse', optimizer='adam')
-model.fit(train_generator, samples_per_epoch=len(train_data),  validation_data=validation_generator, nb_val_samples=len(validation_data), nb_epoch=5)
+model.fit_generator(train_generator, samples_per_epoch=len(train_data), validation_data=validation_generator, nb_val_samples=len(validation_data), nb_epoch=3)
 
 model.save('model.h5')
             

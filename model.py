@@ -48,7 +48,7 @@ validation_generator = generator(validation_data, batch_size=32)
 
 #nVidia model
 model = keras.models.Sequential()
-model.add(keras.layers.Lambda(lambda x: x / 255.0 - 0.5, input_shape=(160,320,3), output_shape=(160,320,3)))
+model.add(keras.layers.Lambda(lambda x: x / 255.0 - 0.5, input_shape=(3,80,320), output_shape=(3,80,320)))
 model.add(keras.layers.Cropping2D(((70,25),(0,0))))
 
 model.add(keras.layers.Convolution2D(24, 5, 5, subsample=(2,2), activation="relu"))

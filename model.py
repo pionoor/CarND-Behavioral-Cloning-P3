@@ -4,8 +4,7 @@ import os
 import numpy as np
 import keras
 import cv2
-from random import shuffle
-
+import sklearn
 
 
 data = []

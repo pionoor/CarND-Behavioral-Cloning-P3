@@ -69,14 +69,16 @@ model.add(keras.layers.Conv2D(64, (3, 3), strides=(2, 2), activation=('relu')))
 
 model.add(keras.layers.Flatten())
 model.add(keras.layers.Dense(100))
+model.add(keras.layers.Dropout(0.5))
 model.add(keras.layers.Dense(50))
+model.add(keras.layers.Dropout(0.5))
 model.add(keras.layers.Dense(10))
 model.add(keras.layers.Dense(1))
 
 model.compile(loss='mse', optimizer='adam')
 
 
-model.fit(X_train, y_train, validation_split=0.2, shuffle=True, nb_epoch=2)
+model.fit(X_train, y_train, validation_split=0.2, shuffle=True, nb_epoch=3)
 
 model.save('model.h5')
             

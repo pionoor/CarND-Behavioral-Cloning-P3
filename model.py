@@ -8,6 +8,7 @@ import numpy as np
 import sklearn
 import random
 
+#reading the lines from CSV
 lines = []
 with open('data/driving_log.csv') as csvfile:
     reader = csv.reader(csvfile)
@@ -17,6 +18,7 @@ with open('data/driving_log.csv') as csvfile:
 images = []
 angles = []
 
+#extracting the paths to the frames and load thim into arrays.
 for line in lines:
     centerImgName = line[0].split('/')[-1]
     leftImgName = line[1].split('/')[-1]
@@ -24,13 +26,10 @@ for line in lines:
     currentPath = 'data/IMG/'
 
     center_image = cv2.cvtColor(cv2.imread(currentPath + centerImgName), cv2.COLOR_BGR2YUV)
-    #center_image = cv2.resize(center_image, (200, 66))
     
     left_image = cv2.cvtColor(cv2.imread(currentPath + leftImgName), cv2.COLOR_BGR2YUV)
-    #left_image = cv2.resize(left_image, (200, 66))
     
     right_image = cv2.cvtColor(cv2.imread(currentPath + rightImgName), cv2.COLOR_BGR2YUV)
-    #right_image = cv2.resize(right_image, (200, 66))
     
     image_flipped = np.copy(np.fliplr(center_image))
 
@@ -50,7 +49,7 @@ for line in lines:
 X_train = np.array(images)
 y_train = np.array(angles)
 
-
+#nVida Self-Driving Car Model
 model = Sequential()
 # Preprocess incoming data, centered around zero with small standard deviation 
 
